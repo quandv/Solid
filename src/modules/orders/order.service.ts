@@ -1,8 +1,14 @@
-import * as vietelPostSDK from 'vietel-post-sdk'; // example
-import * as ghnSDK from 'ghn-sdk'; // example
+// import * as vietelPostSDK from 'vietel-post-sdk'; // example
+// import * as ghnSDK from 'ghn-sdk'; // example
 import * as db from 'db-connection'; // example
 
+import { DeliveryProvider } from "../delivery/delivery.provider"
+import { DeliveryService } from "../delivery/delivery.service";
+
 export class OrderService {
+  private readonly deliveryProvider = new DeliveryProvider();
+  private readonly deliveryService = new DeliveryService(this.deliveryProvider);
+
   async createOrder(order: any): Promise<string> {
     // create order (process & save to DB)
     await this.processOrder(order)
@@ -11,36 +17,32 @@ export class OrderService {
     await this.asignDeliveryProvider(order)
 
     // sent email to user
-    await this.sentReceiptEmail(order)
+    // await this.sentReceiptEmail(order)
 
     // decrese order's products stock
-    await this.updateProductStock(order)
+    // await this.updateProductStock(order)
 
     // ...other tasks
     return "create order successful"
   }
 
   private async processOrder(order: any): Promise<string> {
-    // do somethings
-
+    // do somethings...
+    db.Order.create(order)
     return "saved order to DB"
   }
 
   private async asignDeliveryProvider(order) {
-    if (order.weight > 100) {
-      await vietelPostSDK.createOrder(order)
-    } else {
-      await ghnSDK.createOrder(order)
-    }
+    await this.deliveryService.createOrder(order)
   }
 
-  private async sentReceiptEmail(order) {
-    return "sent receipt email successful"
-  }
+  // private async sentReceiptEmail(order) {
+  //   return "sent receipt email successful"
+  // }
 
-  private async updateProductStock(order) {
-    // do somethings
-    // update to DB
-    db.Product.update()
-  }
+  // private async updateProductStock(order) {
+  //   // do somethings
+  //   // update to DB
+  //   db.Product.update()
+  // }
 }
