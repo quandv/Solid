@@ -23,7 +23,6 @@ export class OrderService {
   private async processOrder(order: any): Promise<string> {
     // do somethings
 
-    // return
     return "saved order to DB"
   }
 
@@ -41,7 +40,6 @@ export class OrderService {
 
   private async updateProductStock(order) {
     // do somethings
-
     // update to DB
     db.Product.update()
   }
