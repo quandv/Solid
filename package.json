@@ -1,0 +1,26 @@
+{
+  "name": "solid",
+  "version": "1.0.0",
+  "description": "demo solid with typescript + expressjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc & node dist/index.js",
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quandv/Solid.git"
+  },
+  "author": "quandv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quandv/Solid/issues"
+  },
+  "homepage": "https://github.com/quandv/Solid#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15"
+  }
+}

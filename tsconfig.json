@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "dist", // folder contains js files compiled
+    "target": "ES6", // compile ts to js es6
+    "module": "commonjs", // standard nodejs to work with other modules
+    // "watch": true, // follow file changes and auto compile
+    "removeComments": true, // remove comments while compile
+    // "sourceMap": true, // create map file
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+  ]
+}
