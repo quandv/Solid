@@ -1,4 +1,7 @@
 export interface IOrderService {
-  createOrder(): string;
-  updateOrder(): string;
+  createOrder(any): Promise<string>;
+  updateOrder(string, any): Promise<string>;
+  asignDeliveryProvider(any): void;
+  sentReceiptEmail(any): Promise<string>;
+  sentReceiptSms(any): Promise<string>;
 }

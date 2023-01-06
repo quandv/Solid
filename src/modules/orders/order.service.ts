@@ -4,8 +4,9 @@ import * as db from 'db-connection'; // example
 
 import { DeliveryProvider } from "../delivery/delivery.provider"
 import { DeliveryService } from "../delivery/delivery.service";
+import { IOrderService } from './order.interface';
 
-export class OrderService {
+export class OrderService implements IOrderService {
   private readonly deliveryProvider = new DeliveryProvider();
   private readonly deliveryService = new DeliveryService(this.deliveryProvider);
 
@@ -26,19 +27,27 @@ export class OrderService {
     return "create order successful"
   }
 
+  async updateOrder(orderId: string, order): Promise<string> {
+    return "update order successful"
+  }
+
   private async processOrder(order: any): Promise<string> {
     // do somethings...
     db.Order.create(order)
     return "saved order to DB"
   }
 
-  private async asignDeliveryProvider(order) {
+  async asignDeliveryProvider(order) {
     await this.deliveryService.createOrder(order)
   }
 
-  // private async sentReceiptEmail(order) {
-  //   return "sent receipt email successful"
-  // }
+  async sentReceiptEmail(order) {
+    return "sent receipt email successful"
+  }
+
+  async sentReceiptSms(order) {
+    return "sent receipt sms successful"
+  }
 
   // private async updateProductStock(order) {
   //   // do somethings
