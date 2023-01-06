@@ -9,9 +9,13 @@ export class DeliveryService implements IDeliveryService {
 
   createOrder = async (order) => {
     if (order.weight > 100) {
-      await this.deliveryProvider.createVietelOrder(order);
+      if(order.height > 1000) {
+        return await this.deliveryProvider.createVietelOrder(order);
+      } else {
+        return await this.deliveryProvider.createJNTOrder(order);
+      }
     } else {
-      await this.deliveryProvider.createGHNOrder(order);
+      return await this.deliveryProvider.createGHNOrder(order);
     }
   }
 }
