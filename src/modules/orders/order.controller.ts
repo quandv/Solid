@@ -1,7 +1,11 @@
-import { OrderService } from "./order.service";
+import { IOrderService } from "./order.interface";
 
 export class OrderController {
-  private orderService: OrderService = new OrderService();
+  private orderService: IOrderService;
+
+  constructor(orderService: IOrderService) {
+    this.orderService = orderService;
+  }
 
   createOrder = (req, res, next) => {
     res.status(201).json({

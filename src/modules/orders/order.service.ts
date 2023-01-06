@@ -1,14 +1,16 @@
 // import * as vietelPostSDK from 'vietel-post-sdk'; // example
 // import * as ghnSDK from 'ghn-sdk'; // example
 import * as db from 'db-connection'; // example
+import { IDeliveryService } from '../delivery/delivery.interface';
 
-import { DeliveryProvider } from "../delivery/delivery.provider"
-import { DeliveryService } from "../delivery/delivery.service";
 import { IOrderDelivery, IOrderNotification, IOrderService } from './order.interface';
 
 export class OrderService implements IOrderService, IOrderDelivery, IOrderNotification {
-  private readonly deliveryProvider = new DeliveryProvider();
-  private readonly deliveryService = new DeliveryService(this.deliveryProvider);
+  private readonly deliveryService: IDeliveryService
+
+  constructor(deliveryService: IDeliveryService) {
+    this.deliveryService = deliveryService
+  }
 
   async createOrder(order: any): Promise<string> {
     // create order (process & save to DB)
