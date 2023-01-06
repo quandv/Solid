@@ -4,9 +4,9 @@ import * as db from 'db-connection'; // example
 
 import { DeliveryProvider } from "../delivery/delivery.provider"
 import { DeliveryService } from "../delivery/delivery.service";
-import { IOrderService } from './order.interface';
+import { IOrderDelivery, IOrderNotification, IOrderService } from './order.interface';
 
-export class OrderService implements IOrderService {
+export class OrderService implements IOrderService, IOrderDelivery, IOrderNotification {
   private readonly deliveryProvider = new DeliveryProvider();
   private readonly deliveryService = new DeliveryService(this.deliveryProvider);
 
