@@ -3,7 +3,9 @@ import { IOrderService } from "./order.interface";
 export class OrderController {
   private orderService: IOrderService;
 
-  constructor(orderService: IOrderService) {
+  constructor(
+    orderService: IOrderService,
+  ) {
     this.orderService = orderService;
   }
 

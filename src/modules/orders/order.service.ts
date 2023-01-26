@@ -2,14 +2,20 @@
 // import * as ghnSDK from 'ghn-sdk'; // example
 import * as db from 'db-connection'; // example
 import { IDeliveryService } from '../delivery/delivery.interface';
+import { IEmailService } from '../email/email.interface';
 
 import { IOrderDelivery, IOrderNotification, IOrderService } from './order.interface';
 
 export class OrderService implements IOrderService, IOrderDelivery, IOrderNotification {
   private readonly deliveryService: IDeliveryService
+  private readonly emailService: IEmailService
 
-  constructor(deliveryService: IDeliveryService) {
+  constructor(
+    deliveryService: IDeliveryService,
+    emailService: IEmailService
+  ) {
     this.deliveryService = deliveryService
+    this.emailService = emailService
   }
 
   async createOrder(order: any): Promise<string> {
@@ -20,7 +26,7 @@ export class OrderService implements IOrderService, IOrderDelivery, IOrderNotifi
     await this.asignDeliveryProvider(order)
 
     // sent email to user
-    // await this.sentReceiptEmail(order)
+    await this.sentReceiptEmail(order)
 
     // decrese order's products stock
     // await this.updateProductStock(order)
@@ -44,7 +50,7 @@ export class OrderService implements IOrderService, IOrderDelivery, IOrderNotifi
   }
 
   async sentReceiptEmail(order) {
-    return "sent receipt email successful"
+    await this.emailService.sentEmail(order)
   }
 
   async sentReceiptSms(order) {
